@@ -4,26 +4,17 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"os"
+	"strconv"
 	"strings"
 )
-
-
-
-/*
- * Complete the 'stringAnagram' function below.
- *
- * The function is expected to return an INTEGER_ARRAY.
- * The function accepts following parameters:
- *  1. STRING_ARRAY dictionary
- *  2. STRING_ARRAY query
- */
 
 func stringAnagram(dictionary []string, query []string) []int32 {
 	ans := make([]int32, 0)
 
-	for _, q := range query {
+	for _, q := range query {//O(q)
 		counter := int32(0)
-		for _, d := range dictionary {
+		for _, d := range dictionary {//O(d)
 			if anagram(q, d) {
 				counter++
 			}
@@ -34,87 +25,82 @@ func stringAnagram(dictionary []string, query []string) []int32 {
 
 	fmt.Println(ans)
 
-	return ans
+	return ans //O(q * d * (f + s))
 }
 
-func anagram(first string, second string) bool {// O(n ^ 2)
+func anagram(first string, second string) bool {
 	if len(first) != len(second) {
 		return false
 	}
 
-	//make map
 	firstMap := make(map[int32]int)
 
-	for _, f := range first {//O(n)
+	for _, f := range first {//O(f)
 		v, _ := firstMap[f]
 		firstMap[f] = v + 1
 	}
 
-	// research map
-	for _, s := range second {//O(n)
+	for _, s := range second {//O(s)
 		v, ok := firstMap[s]
 		if ok {
+			firstMap[s] = v - 1
 			if v == 0 {
-				return false
-			}else {
-				firstMap[s] = v - 1
+				delete(firstMap, s)
 			}
 		}else {
 			return false
 		}
 	}
 
-	for _, v := range firstMap {//O(n)
-		if v != 0 {
-			return false
-		}
+	if len(firstMap) > 0 {
+		return false
 	}
 
 	return true
 }
 func main() {
-	//reader := bufio.NewReaderSize(os.Stdin, 16 * 1024 * 1024)
-	//
-	//stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
-	//checkError(err)
-	//
-	//defer stdout.Close()
-	//
-	//writer := bufio.NewWriterSize(stdout, 16 * 1024 * 1024)
-	//
-	//dictionaryCount, err := strconv.ParseInt(strings.TrimSpace(readLine(reader)), 10, 64)
-	//checkError(err)
-	//
-	//var dictionary []string
-	//
-	//for i := 0; i < int(dictionaryCount); i++ {
-	//	dictionaryItem := readLine(reader)
-	//	dictionary = append(dictionary, dictionaryItem)
-	//}
-	//
-	//queryCount, err := strconv.ParseInt(strings.TrimSpace(readLine(reader)), 10, 64)
-	//checkError(err)
-	//
-	//var query []string
-	//
-	//for i := 0; i < int(queryCount); i++ {
-	//	queryItem := readLine(reader)
-	//	query = append(query, queryItem)
-	//}
+	reader := bufio.NewReaderSize(os.Stdin, 16 * 1024 * 1024)
 
-	stringAnagram([]string{"heater", "cold", "clod", "reheat", "docl"}, []string{"codl", "heater", "abcd"})
+	stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
+	checkError(err)
 
-	//for i, resultItem := range result {
-	//	fmt.Fprintf(writer, "%d", resultItem)
-	//
-	//	if i != len(result) - 1 {
-	//		fmt.Fprintf(writer, "\n")
-	//	}
-	//}
-	//
-	//fmt.Fprintf(writer, "\n")
-	//
-	//writer.Flush()
+	defer stdout.Close()
+
+	writer := bufio.NewWriterSize(stdout, 16 * 1024 * 1024)
+
+	dictionaryCount, err := strconv.ParseInt(strings.TrimSpace(readLine(reader)), 10, 64)
+	checkError(err)
+
+	var dictionary []string
+
+	for i := 0; i < int(dictionaryCount); i++ {
+		dictionaryItem := readLine(reader)
+		dictionary = append(dictionary, dictionaryItem)
+	}
+
+	queryCount, err := strconv.ParseInt(strings.TrimSpace(readLine(reader)), 10, 64)
+	checkError(err)
+
+	var query []string
+
+	for i := 0; i < int(queryCount); i++ {
+		queryItem := readLine(reader)
+		query = append(query, queryItem)
+	}
+
+	result := stringAnagram([]string{"heater", "cold", "clod", "reheat", "docl"}, []string{"codl", "heater", "abcd"})
+
+	for i, resultItem := range result {
+		fmt.Fprintf(writer, "%d", resultItem)
+
+		if i != len(result) - 1 {
+			fmt.Fprintf(writer, "\n")
+		}
+	}
+
+	fmt.Fprintf(writer, "\n")
+
+	writer.Flush()
 }
 
 func readLine(reader *bufio.Reader) string {
