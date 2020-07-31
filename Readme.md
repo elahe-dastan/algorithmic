@@ -19,3 +19,10 @@ Given a list of queries and a list of words, for each query we should return how
 words
 
 [basic certificate](https://www.hackerrank.com/certificates/f788bdf183c4)
+
+## ValidSudoku
+Determine if a 9x9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:<br/>
+
+Each row must contain the digits 1-9 without repetition.<br/>
+Each column must contain the digits 1-9 without repetition.<br/>
+Each of the 9 3x3 sub-boxes of the grid must contain the digits 1-9 without repetition.
