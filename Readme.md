@@ -26,3 +26,7 @@ Determine if a 9x9 Sudoku board is valid. Only the filled cells need to be valid
 Each row must contain the digits 1-9 without repetition.<br/>
 Each column must contain the digits 1-9 without repetition.<br/>
 Each of the 9 3x3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+
+## 3Sum
+Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets<br/>
+in the array which gives the sum of zero.

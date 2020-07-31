@@ -15,19 +15,21 @@ func threeSum(nums []int) [][]int {
 	m := make(map[int]int)
 
 	for _, num := range nums {
-		m[num] = m[num] + 1
+		m[num]++
 	}
 
 	for i := 0; i < len(nums)-2; i++ {
 		for j := i + 1; j < len(nums)-1; j++ {
-			v := 0 - (nums[i]+nums[j])
-			m[nums[i]] = m[nums[i]] - 1
-			m[nums[j]] = m[nums[j]] - 1
+			f := nums[i]
+			s := nums[j]
+			v := 0 - (f+s)
+			m[f]--
+			m[s]--
 			if m[v] > 0 {
-				ans = append(ans, []int{nums[i], nums[j], v})
+				ans = append(ans, []int{f, s, v})
 			}
-			m[nums[i]] = m[nums[i]] + 1
-			m[nums[j]] = m[nums[j]] + 1
+			m[f]++
+			m[s]++
 		}
 	}
 
