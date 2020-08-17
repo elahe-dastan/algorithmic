@@ -30,3 +30,13 @@ Each of the 9 3x3 sub-boxes of the grid must contain the digits 1-9 without repe
 ## 3Sum
 Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets<br/>
 in the array which gives the sum of zero.
+
+## LeaderBoard
+Alice is playing an arcade game and wants to climb to the top of the leaderboard and wants to track her ranking. The game
+uses Dense Ranking.<br/>
+It should return an integer array where each element res[j] represents Alice's rank after the jth game.<br/>
+
+climbingLeaderboard has the following parameter(s):<br/>
+
+scores: an array of integers that represent leaderboard scores<br/>
+alice: an array of integers that represent Alice's scores
