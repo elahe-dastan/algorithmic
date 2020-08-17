@@ -10,7 +10,16 @@ func main() {
 }
 
 func formingMagicSquare(s [][]int32) int32 {
-	magicSquares := permutations([]int32{9, 8, 7, 6})
+	magicSquares := [][][]int32{
+		{{8, 1, 6}, {3, 5, 7}, {4, 9, 2}},
+	{{6, 1, 8}, {7, 5, 3}, {2, 9, 4}},
+	{{4, 9, 2}, {3, 5, 7}, {8, 1, 6}},
+	{{2, 9, 4}, {7, 5, 3}, {6, 1, 8}},
+	{{8, 3, 4}, {1, 5, 9}, {6, 7, 2}},
+	{{4, 3, 8}, {9, 5, 1}, {2, 7, 6}},
+	{{6, 7, 2}, {1, 5, 9}, {8, 3, 4}},
+	{{2, 7, 6}, {9, 5, 1}, {4, 3, 8}},
+	}
 
 	min := int32(100)
 
@@ -24,55 +33,14 @@ func formingMagicSquare(s [][]int32) int32 {
 	return min
 }
 
-func calculateCost(f [][]int32, s []int32) int32 {
-	firstMin := math.Abs(float64(f[0][0]-s[0])) + math.Abs(float64(f[2][2]-(10-s[0])))
-	if math.Abs(float64(f[2][2]-s[0])) + math.Abs(float64(f[0][0]-(10-s[0]))) < firstMin {
-		firstMin = math.Abs(float64(f[2][2]-s[0])) + math.Abs(float64(f[0][0]-(10-s[0])))
-	}
+func calculateCost(f [][]int32, s [][]int32) int32 {
+	cost := int32(0)
 
-	secondMin := math.Abs(float64(f[0][1]-s[1])) + math.Abs(float64(f[2][1]-(10-s[1])))
-	if math.Abs(float64(f[2][1]-s[1])) + math.Abs(float64(f[0][1]-(10-s[1]))) < secondMin {
-		secondMin = math.Abs(float64(f[2][1]-s[1])) + math.Abs(float64(f[0][1]-(10-s[1])))
-	}
-
-	thirdMin := math.Abs(float64(f[0][2]-s[2])) + math.Abs(float64(f[2][0]-(10-s[2])))
-	if math.Abs(float64(f[2][0]-s[2])) + math.Abs(float64(f[0][2]-(10-s[2]))) < thirdMin {
-		thirdMin = math.Abs(float64(f[2][0]-s[2])) + math.Abs(float64(f[0][2]-(10-s[2])))
-	}
-
-	fourthMin := math.Abs(float64(f[1][0]-s[3])) + math.Abs(float64(f[1][2]-(10-s[3])))
-	if math.Abs(float64(f[1][2]-s[3])) + math.Abs(float64(f[1][0]-(10-s[3]))) < fourthMin {
-		fourthMin = math.Abs(float64(f[1][2]-s[3])) + math.Abs(float64(f[1][0]-(10-s[3])))
-	}
-
-	fifthMin := math.Abs(float64(f[1][1] - 5))
-
-	return int32(firstMin + secondMin + thirdMin + fourthMin + fifthMin)
-}
-func permutations(arr []int32)[][]int32{
-	var helper func([]int32, int32)
-	var res [][]int32
-
-	helper = func(arr []int32, n int32){
-		if n == 1{
-			tmp := make([]int32, len(arr))
-			copy(tmp, arr)
-			res = append(res, tmp)
-		} else {
-			for i := int32(0); i < n; i++{
-				helper(arr, n - 1)
-				if n % 2 == 1{
-					tmp := arr[i]
-					arr[i] = arr[n - 1]
-					arr[n - 1] = tmp
-				} else {
-					tmp := arr[0]
-					arr[0] = arr[n - 1]
-					arr[n - 1] = tmp
-				}
-			}
+	for i := 0; i < 3; i++ {
+		for j := 0; j < 3; j++ {
+			cost += int32(math.Abs(float64(f[i][j] - s[i][j])))
 		}
 	}
-	helper(arr, int32(len(arr)))
-	return res
+
+	return cost
 }
