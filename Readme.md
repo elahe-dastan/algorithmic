@@ -44,3 +44,14 @@ alice: an array of integers that represent Alice's scores
 ## Magic Square
 You will be given a 3*3 matrix (s) of integers in the inclusive range [1, 9]. We can convert any digit a to any other digit
  b in the range [1, 9] at cost of |a - b|. Given s, convert it into a magic square at minimal cost. Print this cost on a new line.
+ 
+## Encryption
+An English text needs to be encrypted using the following encryption scheme.
+First, the spaces are removed from the text. Let L be the length of this text.
+Then, characters are written into a grid, whose rows and columns have the following constraints:<br/>
+
+floor(sqrt(L)) <= row <= column <= ceil(sqrt(L))<br/>
+
+Ensure that rows * columns <= L
+If multiple grids satisfy the above conditions, choose the one with the minimum area, i.e. rows * columns.
+The encoded message is obtained by displaying the characters in a column, inserting a space, and then displaying the next column and inserting a space, and so on.
