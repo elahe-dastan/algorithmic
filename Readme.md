@@ -54,4 +54,18 @@ floor(sqrt(L)) <= row <= column <= ceil(sqrt(L))<br/>
 
 Ensure that rows * columns <= L
 If multiple grids satisfy the above conditions, choose the one with the minimum area, i.e. rows * columns.
-The encoded message is obtained by displaying the characters in a column, inserting a space, and then displaying the next column and inserting a space, and so on.
+The encoded message is obtained by displaying the characters in a column, inserting a space, and then displaying the next 
+column and inserting a space, and so on.
+
+## Bomberman
+Each bomb can be planted in any cell of the grid but once planted, it will detonate after exactly 3 seconds. Once a bomb 
+detonates, it's destroyed — along with anything in its four neighboring cells. 
+If there is a bomb in a neighboring cell, the neighboring bomb is destroyed without detonating, so there's no chain reaction.
+
+Bomberman is immune to bombs, so he can move freely throughout the grid. Here's what he does:
+
+Initially, Bomberman arbitrarily plants bombs in some of the cells, the initial state.<br/>
+After one second, Bomberman does nothing.<br/>
+After one more second, Bomberman plants bombs in all cells without bombs, thus filling the whole grid with bombs. No bombs detonate at this point.<br/>
+After one more second, any bombs planted exactly three seconds ago will detonate. Here, Bomberman stands back and observes.<br/>
+Bomberman then repeats steps 3 and 4 indefinitely.
